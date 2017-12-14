@@ -4,7 +4,7 @@
 #include<stdlib.h>
 using namespace std;
 
-//ËÄÔªÊ½±íµÄ½á¹¹
+//å››å…ƒå¼è¡¨çš„ç»“æ„
 struct {
 	char result[12];
 	char ag1[12];
@@ -14,7 +14,7 @@ struct {
 
 char prog[80],token[12];
 char ch;
-int syn,p,m=0,n,sum=0,kk;    //pÊÇ»º³åÇøprogµÄÖ¸Õë£¬mÊÇtokenµÄÖ¸Õë
+int syn,p,m=0,n,sum=0,kk;    //pæ˜¯ç¼“å†²åŒºprogçš„æŒ‡é’ˆï¼Œmæ˜¯tokençš„æŒ‡é’ˆ
 char *rwtab[6]= {"begin","if","then","while","do","end"};
 void scaner();
 char *factor(void);
@@ -26,7 +26,7 @@ char *newtemp();
 int statement();
 int k=0;
 
-// Éú³ÉÒ»¸öÈıµØÖ·Óï¾äËÍµ½ËÄÔªÊ½±íÖĞ
+// ç”Ÿæˆä¸€ä¸ªä¸‰åœ°å€è¯­å¥é€åˆ°å››å…ƒå¼è¡¨ä¸­
 void emit(char *result,char *ag1,char *op,char *ag2) {
 	strcpy(quad.result,result);
 	strcpy(quad.ag1,ag1);
@@ -36,7 +36,7 @@ void emit(char *result,char *ag1,char *op,char *ag2) {
 	cout<<quad.result<<"="<<quad.ag1<<quad.op<<quad.ag2<<endl;
 }
 
-//»ØËÍÒ»¸öĞÂµÄÁÙÊ±±äÁ¿Ãû£¬ÁÙÊ±±äÁ¿Ãû²úÉúµÄË³ĞòÎªT1£¬T2
+//å›é€ä¸€ä¸ªæ–°çš„ä¸´æ—¶å˜é‡åï¼Œä¸´æ—¶å˜é‡åäº§ç”Ÿçš„é¡ºåºä¸ºT1ï¼ŒT2
 char *newtemp() {
 	char *p;
 	char m[12];
@@ -163,8 +163,8 @@ void scaner() {
 		}
 }
 
-//ÔÚÔ­À´Óï·¨·ÖÎöµÄ»ù´¡ÉÏ²åÈëÏàÓ¦µÄÓïÒå¶¯×÷£º½«ÊäÈë´®·­Òë³ÉËÄÔªÊ½ĞòÁĞ
-//¶Ô±í´ïÊ½¡¢¸³ÖµÓï¾ä½øĞĞ·­Òë
+//åœ¨åŸæ¥è¯­æ³•åˆ†æçš„åŸºç¡€ä¸Šæ’å…¥ç›¸åº”çš„è¯­ä¹‰åŠ¨ä½œï¼šå°†è¾“å…¥ä¸²ç¿»è¯‘æˆå››å…ƒå¼åºåˆ—
+//å¯¹è¡¨è¾¾å¼ã€èµ‹å€¼è¯­å¥è¿›è¡Œç¿»è¯‘
 int lrparser() {
 	int schain=0;
 	kk=0;
@@ -179,11 +179,11 @@ int lrparser() {
 
 		else {
 			if(kk!=1)
-				cout<<"È±end!"<<endl;
+				cout<<"ç¼ºend!"<<endl;
 			kk=1;
 		}
 	} else {
-		cout<<"È±begin!"<<endl;
+		cout<<"ç¼ºbegin!"<<endl;
 		kk=1;
 	}
 
@@ -215,7 +215,7 @@ int statement() {
 				emit(tt,eplace,"","");
 				schain=0;
 			} else {
-				cout<<"È±ÉÙ¸³Öµ·û!"<<endl;
+				cout<<"ç¼ºå°‘èµ‹å€¼ç¬¦!"<<endl;
 				kk=1;
 			}
 			return(schain);
@@ -230,15 +230,15 @@ char *expression_r(void) {
 	ep2=(char *)malloc(12);
 	eplace=(char *)malloc(12);
 	tt =(char *)malloc(12);
-	strcpy(eplace,term ());          //µ÷ÓÃterm·ÖÎö²úÉú±í´ïÊ½¼ÆËãµÄµÚÒ»Ïîeplace
+	strcpy(eplace,term ());          //è°ƒç”¨termåˆ†æäº§ç”Ÿè¡¨è¾¾å¼è®¡ç®—çš„ç¬¬ä¸€é¡¹eplace
 
 	while((syn==15)||(syn==16)) {
 		if(syn==15)strcpy(tt,"+");
 		else strcpy(tt,"-");
 		scaner();
-		strcpy(ep2,term());        //µ÷ÓÃterm·ÖÎö²úÉú±í´ïÊ½¼ÆËãµÄµÚ¶şÏîep2
-		strcpy(tp,newtemp());    //µ÷ÓÃnewtemp²úÉúÁÙÊ±±äÁ¿tp´æ´¢¼ÆËã½á¹û
-		emit(tp,eplace,tt,ep2);    //Éú³ÉËÄÔªÊ½ËÍÈëËÄÔªÊ½±í
+		strcpy(ep2,term());        //è°ƒç”¨termåˆ†æäº§ç”Ÿè¡¨è¾¾å¼è®¡ç®—çš„ç¬¬äºŒé¡¹ep2
+		strcpy(tp,newtemp());    //è°ƒç”¨newtempäº§ç”Ÿä¸´æ—¶å˜é‡tpå­˜å‚¨è®¡ç®—ç»“æœ
+		emit(tp,eplace,tt,ep2);    //ç”Ÿæˆå››å…ƒå¼é€å…¥å››å…ƒå¼è¡¨
 		strcpy(eplace,tp);
 	}
 	return(eplace);
@@ -256,9 +256,9 @@ char *term(void) {
 		if(syn==13)strcpy(tt,"*");
 		else strcpy(tt,"/");
 		scaner();
-		strcpy(ep2,factor());      //µ÷ÓÃfactor·ÖÎö²úÉú±í´ïÊ½¼ÆËãµÄµÚ¶şÏîep2
-		strcpy(tp,newtemp());    //µ÷ÓÃnewtemp²úÉúÁÙÊ±±äÁ¿tp´æ´¢¼ÆËã½á¹û
-		emit(tp,eplace,tt,ep2);    //Éú³ÉËÄÔªÊ½ËÍÈëËÄÔªÊ½±í
+		strcpy(ep2,factor());      //è°ƒç”¨factoråˆ†æäº§ç”Ÿè¡¨è¾¾å¼è®¡ç®—çš„ç¬¬äºŒé¡¹ep2
+		strcpy(tp,newtemp());    //è°ƒç”¨newtempäº§ç”Ÿä¸´æ—¶å˜é‡tpå­˜å‚¨è®¡ç®—ç»“æœ
+		emit(tp,eplace,tt,ep2);    //ç”Ÿæˆå››å…ƒå¼é€å…¥å››å…ƒå¼è¡¨
 		strcpy(eplace,tp);
 	}
 	return(eplace);
@@ -269,22 +269,22 @@ char *factor(void) {
 	fplace=(char *)malloc(12);
 	strcpy(fplace,"");
 	if(syn==10) {
-		strcpy(fplace,token);             //½«±êÊ¶·ûtokenµÄÖµ¸³¸øfplace
+		strcpy(fplace,token);             //å°†æ ‡è¯†ç¬¦tokençš„å€¼èµ‹ç»™fplace
 		scaner();
 	} else if(syn==11) {
 		itoa(sum,fplace,10);
 		scaner();
 	} else if(syn==27) {
 		scaner();
-		fplace=expression_r();             //µ÷ÓÃexpression·ÖÎö·µ»Ø±í´ïÊ½µÄÖµ
+		fplace=expression_r();             //è°ƒç”¨expressionåˆ†æè¿”å›è¡¨è¾¾å¼çš„å€¼
 		if(syn==28)
 			scaner();
 		else {
-			cout<<"È±)´íÎó!"<<endl;
+			cout<<"ç¼º)é”™è¯¯!"<<endl;
 			kk=1;
 		}
 	} else {
-		cout<<"È±(´íÎó!"<<endl;
+		cout<<"ç¼º(é”™è¯¯!"<<endl;
 		kk=1;
 	}
 	return(fplace);
@@ -295,18 +295,18 @@ int main(void) {
 	kk=0;
 	p=0;
 
-	cout<<"**********ÓïÒå·ÖÎö³ÌĞò**********"<<endl;
+	cout<<"**********è¯­ä¹‰åˆ†æç¨‹åº**********"<<endl;
 
 	if( (fp=fopen("ex6.txt","r"))==NULL ) {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡\n");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼\n");
 		exit(1);
 	}
 
 	do {
 		ch=fgetc(fp);
 		prog[p++]=ch;
-	} while(ch!='#');  //½«ÎÄ¼şÖĞµÄ×Ö·û´®´æÈëprog[]
-	prog[p]='\0';  //ÒòÎªµ¥¸ö×Ö·û¶ÁÈ¡£¬¼ÓÈë'\0'·ÀÖ¹´æÈë·Ç·¨Êı¾İ
+	} while(ch!='#');  //å°†æ–‡ä»¶ä¸­çš„å­—ç¬¦ä¸²å­˜å…¥prog[]
+	prog[p]='\0';  //å› ä¸ºå•ä¸ªå­—ç¬¦è¯»å–ï¼ŒåŠ å…¥'\0'é˜²æ­¢å­˜å…¥éæ³•æ•°æ®
 
 
 	p=0;

@@ -1,1 +1,1 @@
-begin a:=10; x:=2*3; b:=a+x end#                                                       
+begin a==10; x==2*3; b==a+x end#                                                       

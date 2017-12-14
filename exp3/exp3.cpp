@@ -1,13 +1,13 @@
 #include "stdio.h"
-#include "string.h"                 /*¶¨Òå×Ö·û´®¿âº¯Êı*/
-#include "conio.h"                  /*Ìá¹©ÓĞ¹ØÆÁÄ»´°¿Ú²Ù×÷º¯Êı*/
-#include "ctype.h"                  /*·ÖÀàº¯Êı*/
+#include "string.h"                 /*å®šä¹‰å­—ç¬¦ä¸²åº“å‡½æ•°*/
+#include "conio.h"                  /*æä¾›æœ‰å…³å±å¹•çª—å£æ“ä½œå‡½æ•°*/
+#include "ctype.h"                  /*åˆ†ç±»å‡½æ•°*/
 #include <cstdlib>
-char prog[80]={'\0'},token[8];                     /*´æ·Å¹¹³Éµ¥´Ê·ûºÅµÄ×Ö·û´®*/
+char prog[80]={'\0'},token[8];                     /*å­˜æ”¾æ„æˆå•è¯ç¬¦å·çš„å­—ç¬¦ä¸²*/
 char ch;
-int  syn,                           /*´æ·Åµ¥´Ê×Ö·ûµÄÖÖ±ğÂë*/
-n,kk,sum,                           /*´æ·ÅÕûÊıĞÍµ¥´Ê*/
-m,p;  /*pÊÇ»º³åÇøprogµÄÖ¸Õë£¬mÊÇtokenµÄÖ¸Õë*/
+int  syn,                           /*å­˜æ”¾å•è¯å­—ç¬¦çš„ç§åˆ«ç */
+n,kk,sum,                           /*å­˜æ”¾æ•´æ•°å‹å•è¯*/
+m,p;  /*pæ˜¯ç¼“å†²åŒºprogçš„æŒ‡é’ˆï¼Œmæ˜¯tokençš„æŒ‡é’ˆ*/
 void expression();
 char *rwtab[6]={"begin","if","then","while","do","end"};
 void scaner()
@@ -16,9 +16,9 @@ void scaner()
     for (n=0;n<8;n++)token[n]='\0';
     ch=prog[p++];
     while (ch==' ')ch=prog[p++];
-    if (isalpha(ch))    /*chÎª×ÖÄ¸×Ö·û*/
+    if (isalpha(ch))    /*chä¸ºå­—æ¯å­—ç¬¦*/
     {
-        while (isalpha(ch)||isdigit(ch))    /*ch Îª×ÖÄ¸×Ö·û»òÕßÊı×Ö×Ö·û*/
+        while (isalpha(ch)||isdigit(ch))    /*ch ä¸ºå­—æ¯å­—ç¬¦æˆ–è€…æ•°å­—å­—ç¬¦*/
         {
             token[m++]=ch; ch=prog[p++];
         }
@@ -26,16 +26,16 @@ void scaner()
         ch=prog[p--];
         syn=10;
         for (n=0;n<6;n++)
-            if (strcmp(token,rwtab[n])==0)    /*×Ö·û´®µÄ±È½Ï*/
+            if (strcmp(token,rwtab[n])==0)    /*å­—ç¬¦ä¸²çš„æ¯”è¾ƒ*/
             {
                 syn=n+1;
                 break;
             }
     }
     else
-        if (isdigit(ch))    /*chÊÇÊı×Ö×Ö·û*/
+        if (isdigit(ch))    /*chæ˜¯æ•°å­—å­—ç¬¦*/
         {
-            while (isdigit(ch))    /*chÊÇÊı×Ö×Ö·û*/
+            while (isdigit(ch))    /*chæ˜¯æ•°å­—å­—ç¬¦*/
             {
                 sum=sum*10+ch-'0'; ch=prog[p++];
             }
@@ -117,20 +117,20 @@ void scaner()
 
 void factor()
 {
-  printf("Òò×Ó\n");
+  printf("å› å­\n");
   if (syn==10) {
       printf("%s\n",token );
       scaner();
   }else if (syn==11) {
-      printf("ÎŞ·ûºÅÊı×Ö%d\n",sum );
+      printf("æ— ç¬¦å·æ•°å­—%d\n",sum );
       scaner();
   }else if (syn==27) {
       scaner();
-		  printf("Óöµ½×óÀ¨ºÅ£¬±í´ïÊ½·ÖÎöº¯Êı\n\n");
+		  printf("é‡åˆ°å·¦æ‹¬å·ï¼Œè¡¨è¾¾å¼åˆ†æå‡½æ•°\n\n");
 		  expression();
       if (syn==28) {
-          scaner();     //ÓĞ)
-          printf("ÓÒÀ¨ºÅ\n");
+          scaner();     //æœ‰)
+          printf("å³æ‹¬å·\n");
       }else{
           printf("\')\' ERROR!\n");
       }
@@ -142,88 +142,88 @@ void factor()
 
 void term()
 {
-  printf("<Ïî>¡ú<Òò×Ó>{<³Ë·¨ÔËËã·û><Òò×Ó>}\n");
+  printf("<é¡¹>â†’<å› å­>{<ä¹˜æ³•è¿ç®—ç¬¦><å› å­>}\n");
     factor();
-    while (syn==15 || syn==16)  //ÓĞ* , /
+    while (syn==15 || syn==16)  //æœ‰* , /
     {
-    	printf("ÔËËã·û%s\n",token);
+    	printf("è¿ç®—ç¬¦%s\n",token);
         scaner();
-        
+
         printf("%s\n",token);
-		    printf("µ÷ÓÃfactorº¯Êı\n\n");
+		    printf("è°ƒç”¨factorå‡½æ•°\n\n");
 		    factor();
     }
     return;
 }
 
-void expression()  //±í´ïÊ½·ÖÎöº¯Êı
+void expression()  //è¡¨è¾¾å¼åˆ†æå‡½æ•°
 {
-  printf("<±í´ïÊ½>¡ú[+|-]<Ïî>{<¼Ó·¨ÔËËã·û><Ïî>}\n");
+  printf("<è¡¨è¾¾å¼>â†’[+|-]<é¡¹>{<åŠ æ³•è¿ç®—ç¬¦><é¡¹>}\n");
     term();
-    while (syn==13 || syn==14)   //ÓĞ+ , -
+    while (syn==13 || syn==14)   //æœ‰+ , -
     {
-        printf("ÔËËã·û%s\n",token);
+        printf("è¿ç®—ç¬¦%s\n",token);
 		scaner();
-        
+
         printf("%s\n",token);
-		    printf("µ÷ÓÃtermº¯Êı\n\n");
+		    printf("è°ƒç”¨termå‡½æ•°\n\n");
 		    term();
     }
     return;
 }
-void statement()  //Óï¾ä·ÖÎöº¯Êı
+
+void statement()  //è¯­å¥åˆ†æå‡½æ•°
 {
-  printf("<¸³ÖµÓï¾ä>¡ú<±êÊ¶·û>=<±í´ïÊ½>\n");
+  printf("<èµ‹å€¼è¯­å¥>â†’<æ ‡è¯†ç¬¦>=<è¡¨è¾¾å¼>\n");
   printf("%s\n",token);
-    if (syn==10)  //ÊÇ·ñ±êÊ¶·û
+    if (syn==10)  //æ˜¯å¦æ ‡è¯†ç¬¦
     {
         scaner();
-        if (syn==18)  //ÓĞ:=
+        if (syn==18)  //æœ‰:=
         {
             scaner();
-			printf(":=\n");
-			printf("µ÷ÓÃ±í´ïÊ½·ÖÎöº¯Êı\n\n");
-			expression();
-        }
-        else
-        {
+			      printf(":=\n");
+			      printf("è°ƒç”¨è¡¨è¾¾å¼åˆ†æå‡½æ•°\n\n");
+			      expression();
+        }else{
             printf("\":=\" ERROR!\n");
             kk=1;
-        } }
-    else
-    {   printf("statement ERROR!\n");
+        }
+    }else{
+        printf("statement ERROR!\n");
         kk=1;
     }
     return;
 }
 
-void yucu()  //Óï¾ä´®·ÖÎö
+void yucu()  //è¯­å¥ä¸²åˆ†æ
 {
-  printf("¸´ºÏÓï¾ä·ÖÎö\n");
+  printf("å¤åˆè¯­å¥åˆ†æ\n");
   printf("%s\n",token);
     statement();
-    while (syn==26)  //ÓĞ;
+    while (syn==26)  //æœ‰;
     {
          scaner();
          printf(";\n");
-		     printf("µ÷ÓÃÓï¾ä·ÖÎöº¯Êı\n\n");
+		     printf("è°ƒç”¨è¯­å¥åˆ†æå‡½æ•°\n\n");
 		     statement();
     }
     return;
 }
+
 void lrparser()
 {
-  //begin¿ªÍ·
+  //beginå¼€å¤´
     if (syn==1){
       scaner();
-		  printf("<¸´ºÏÓï¾ä>¡úbegin <Óï¾ä>{;<Óï¾ä>} end\n");
+		  printf("<å¤åˆè¯­å¥>â†’begin <è¯­å¥>{;<è¯­å¥>} end\n");
 		  printf("begin\n");
-      printf("µ÷ÓÃÓï¾ä´®·ÖÎöº¯Êı\n\n");
+      printf("è°ƒç”¨è¯­å¥ä¸²åˆ†æå‡½æ•°\n\n");
 		  yucu();
       if (syn==6){
            scaner();
            if (syn==0 && (kk==0)){
-             printf("\n\nÓï·¨·ÖÎö½á¹û£º\n");
+             printf("\n\nè¯­æ³•åˆ†æç»“æœï¼š\n");
              printf("success");
            }else{
              if (kk!=1){
@@ -246,17 +246,17 @@ int main(void)
 
     if( (fp=fopen("ex3.txt","r"))==NULL )
     {
-        printf("ÎÄ¼ş´ò¿ª´íÎó£¡\n");
+        printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼\n");
         exit(1);
     }
 
     do{
         ch=fgetc(fp);
         prog[p++]=ch;
-    }while(ch!=EOF);  //½«ÎÄ¼şÖĞµÄ×Ö·û´®´æÈëprog[]
-    prog[p]='\0';  //ÒòÎªµ¥¸ö×Ö·û¶ÁÈ¡£¬¼ÓÈë'\0'·ÀÖ¹´æÈë·Ç·¨Êı¾İ
+    }while(ch!=EOF);  //å°†æ–‡ä»¶ä¸­çš„å­—ç¬¦ä¸²å­˜å…¥prog[]
+    prog[p]='\0';  //å› ä¸ºå•ä¸ªå­—ç¬¦è¯»å–ï¼ŒåŠ å…¥'\0'é˜²æ­¢å­˜å…¥éæ³•æ•°æ®
 
-    printf("Ô´³ÌĞò:\n%s\n\nÓï·¨·ÖÎö¿ªÊ¼£º\n",prog);
+    printf("æºç¨‹åº:\n%s\n\nè¯­æ³•åˆ†æå¼€å§‹ï¼š\n",prog);
 
     p=0;
     scaner();
@@ -266,4 +266,3 @@ int main(void)
 
     return 0;
  }
-
