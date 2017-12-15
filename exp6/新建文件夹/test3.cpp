@@ -831,25 +831,18 @@ bool Statement() {
 
 
 int main() {
-	FILE *fp;
     p = 0;
     initwordType();
-//    printf("输入词法分析串以#作为结束\n");
-	if( (fp=fopen("test3.txt","r"))==NULL ) {
-  		printf("文件打开错误！\n");
-  		exit(1);
-  	}
-
+    printf("输入 #结束\n");
     do {
-//        ch=getchar();
-        ch=fgetc(fp);
+        ch = getchar();
         program[p++] = ch;
     } while (ch != '#');
     p = 0;
     q = 0;
     w = 0;
     for(int i=0;program[i]!='\0'&&program[i]!='\n';i++)
-        printf("%c",program[i]);//输出第一行代码
+        printf("%c",program[i]);
     printf("\n");
     Scanner();
     Constdes();

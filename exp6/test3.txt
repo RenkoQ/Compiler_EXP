@@ -1,5 +1,8 @@
-const x=1,y=2;
-Var a,b;
+Const x=8,y=7;
+Var a,b,c;
 begin
-a=5*x
-end #
+c=x+y;
+a=x-y;
+b=a*x
+end
+#
