@@ -1,0 +1,5 @@
+const x=1,y=2;
+Var a,b;
+begin
+a=5*x
+end #
